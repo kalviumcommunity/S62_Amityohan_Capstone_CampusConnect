@@ -18,6 +18,26 @@ Often students tend to sell their resources, such as old electronics/clothes tha
 
 3. Campus Marketplace: A section of the application where students can sell/trade items like books, electronics etc. within the campus community.
 
+
+## Tech Stack
+
+### Frontend
+- **Framework:** React.js
+- **Styling:** TailwindCSS
+- **State Management:** Redux (for complex global states)
+- **Routing:** React Router
+- **Hosting:** Vercel or Netlify
+
+### Backend
+- **Framework:** Node.js with Express.js
+- **Storage:** Firebase Storage
+- **APIs:** RESTful APIs for CRUD operations
+
+### Database
+- **Database:** MongoDB (NoSQL)
+- **Hosting:** MongoDB Atlas
+- **Schema Design:** Users collection (name, email, role, etc.)
+
 ## Project Development Plan
 
 ### Phase 1: Planning
