@@ -3,13 +3,13 @@ require("dotenv").config;
 const express=require('express');
 
 //connecting to database
-const connectDB=require('./DB/database.js');
+const connectDB=require('./src/DB/database.js');
 
 //importing models
-const userModel=require('./models/user.model.js')
-const noteModel=require('./models/note.model.js')
-const eventModel=require('./models/event.model.js')
-const markmetPlaceModel=require('./models/marketPlace.odel.js')
+const userModel=require('./src/models/user.model.js')
+const noteModel=require('./src/models/note.model.js')
+const eventModel=require('./src/models/event.model.js')
+const markmetPlaceModel=require('./src/models/marketPlace.odel.js')
 
 const app=express();
 const PORT=process.env.PORT || 5000;
