@@ -9,7 +9,7 @@ const connectDB=require('./DB/database.js');
 const userModel=require('./models/user.model.js')
 const noteModel=require('./models/note.model.js')
 const eventModel=require('./models/event.model.js')
-const marketPlaceModel=require('./models/marketPlace.model.js')
+const markmetPlaceModel=require('./models/marketPlace.odel.js')
 
 const app=express();
 const PORT=process.env.PORT || 5000;
