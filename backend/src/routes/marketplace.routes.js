@@ -15,7 +15,7 @@ router.get('/',async (req,res)=>{
 
 router.get('/:id',async(req,res)=>{
     try{
-        const {id}=req.params.id;
+        const {id}=req.params;
         const item=await marketPlaceModel.findById(id);
         if (!item){
             return res.status(404).send({message:"Item not found", id});
