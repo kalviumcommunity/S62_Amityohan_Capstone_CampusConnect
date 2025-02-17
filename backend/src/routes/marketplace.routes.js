@@ -2,6 +2,8 @@ const express=require('express')
 const router=express.Router()
 const marketPlaceModel=require('../models/marketPlace.model.js')
 
+//getting all the items
+
 router.get('/',async (req,res)=>{
     try{
         const items=await marketPlaceModel.find();
@@ -12,6 +14,8 @@ router.get('/',async (req,res)=>{
         return res.status(500).send({message:"Internal server error", er })
     }
 })
+
+//getting an id through it's id
 
 router.get('/:id',async(req,res)=>{
     try{
@@ -24,6 +28,32 @@ router.get('/:id',async(req,res)=>{
                 .send({message:"Item found", item})
     }catch(er){
         return res.status(500).send({message:"Internal server error", er })
+    }
+})
+
+//adding a new item 
+
+router.post('/add-item', async(req,res)=>{
+    try{
+        const {itemName, itemDescription, price, seller, }=req.body;
+
+        if (!itemName || !itemDescription || !price || !seller){
+            return res.status(400)
+                    .send({message:"All fields are requried"})
+        }
+
+        const newItem= await marketPlaceModel.create({
+            itemName:itemName,
+            itemDescription:itemDescription,
+            price:price,
+            seller:seller
+        })
+
+        return res.status(201)
+                .send({message:"Item listed successfully", newItem})
+
+    }catch(er){
+        return res.status(500).send({message:"Internal server error", er})
     }
 })
 

@@ -34,4 +34,28 @@ router.get(":/id", async(req,res)=>{
 })
 
 
+router.post('/create-note', async(req,res)=>{
+    try{
+        const {noteTitle, noteDescription, fileUrl, uploader}=req.body;
+
+        if(!noteTitle || !noteDescription || !fileUrl || !uploader){
+            return res.status(400).json({mesasge:"All fields are required"});
+        }
+
+        const newNote= await noteModel.create({
+            noteTitle:noteTitle,
+            noteDescription:noteDescription,
+            fileUrl:fileUrl,
+            uploader:uploader
+        });
+
+        return res.status(201)
+                .send({message:"Note created successfully", newNote});
+
+    }catch(er){
+        return res.status(500)
+                .send({message:"Internal server error", er})
+    }
+})
+
 module.exports=router;
