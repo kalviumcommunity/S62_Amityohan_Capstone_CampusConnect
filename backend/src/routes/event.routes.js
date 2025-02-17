@@ -13,7 +13,7 @@ router.get('/',async(req,res)=>{
 
     }catch(er){
         return res.status(500)
-                .send({message:"Internal Server error",er});
+                .send({message:"Internal Server error",error:er.message});
     }
 })
 
@@ -23,7 +23,7 @@ router.get('/',async(req,res)=>{
 router.get('/:id', async(req,res)=>{
     try{
         const {id}=req.params;
-        const event=eventModel.findById(id);
+        const event=await eventModel.findById(id);
         if(!event){
             return res.status(404).send({message:" Event not found", id});
         }
@@ -33,7 +33,7 @@ router.get('/:id', async(req,res)=>{
         
     }catch(er){
         return res.status(500)
-                .send({message: "Internal server error", er})
+                .send({message: "Internal server error", error:er.message})
     }
 });
 

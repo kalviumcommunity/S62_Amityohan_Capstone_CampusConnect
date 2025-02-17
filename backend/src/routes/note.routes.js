@@ -5,7 +5,7 @@ const noteModel=require('../models/note.model.js')
 
 router.get("/", async(req,res)=>{
     try{
-        const notes=noteModel.find();
+        const notes=await noteModel.find();
         res.status(200)
         .send({message:"Notes fetched successfully", notes})
     
@@ -15,10 +15,10 @@ router.get("/", async(req,res)=>{
     }
 })
 
-router.get(":/id", async(req,res)=>{
+router.get("/:id", async(req,res)=>{
     try{
         const {id}=req.params;
-        const note=noteModel.findById(id);
+        const note= await noteModel.findById(id);
         if(!note){
             return res.status(404).send({message:"Note not found",id})
         }
