@@ -67,4 +67,34 @@ router.post('/add-event', async(req,res)=>{
     }
 })
 
+//to update an event
+
+router.put("/update/:id", async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const{eventName, eventDescription, date, organizer, location}=req.body;
+        const event=await eventModel.findById(id);
+        
+        if(!event){
+            return res.status(404).send({message:"Event not found"});
+        }
+
+        const updatedEvent=await eventModel.findByIdAndUpdate(
+            id,
+            {eventName, eventDescription, date, organizer, location},
+            {new:true}
+        )
+
+        if(!updatedEvent){
+            return res.status(404).send({message: "Event not found"});
+        }
+
+        return res.status(201).send({message:"Event Updated", updatedEvent})
+        
+
+    }catch(er){ 
+        return res.status(500).send({message:"Internal server error", error:er.message})
+    }
+})
+
 module.exports=router;
