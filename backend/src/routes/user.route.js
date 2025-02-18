@@ -44,6 +44,7 @@ router.post('/create-user',async(req,res)=>{
         }
 
         const existingUser = await userModel.findOne({ email });
+
         if (existingUser) {
             return res.status(400).send({ message: "Email is already registered" });
         }
@@ -61,6 +62,31 @@ router.post('/create-user',async(req,res)=>{
     }catch(er){
         return res.status(500)
                 .send({message:"Internal Server error",er});
+    }
+})
+
+// update user details
+
+router.put('/update/:id', async(req,res)=>{
+    try{
+        const {id}= req.params
+        const {name,email,password}=req.body;
+        const user= await userModel.findById(id);
+        if (!user){
+            return res.status(404).send({message:"User not found"})
+        }
+
+        const updateUser=await userModel.findByIdAndUpdate(
+            id,
+            {name, email, password},
+            {new:true} 
+        )
+
+        return res.status(200).send({message:"User updated successfully", updateUser})
+
+
+    }catch(er){
+        return res.status(500).send({message:"Internal Server error",error:er.message});
     }
 })
 
