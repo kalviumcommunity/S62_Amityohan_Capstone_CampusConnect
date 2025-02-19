@@ -9,3 +9,4 @@ const MarketplaceSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Marketplace", MarketplaceSchema);
+ 

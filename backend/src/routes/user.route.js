@@ -90,4 +90,24 @@ router.put('/update/:id', async(req,res)=>{
     }
 })
 
+//to delete an user
+
+router.delete('/delete/:id', async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const user= await userModel.findById(id);
+        if(!user){
+            return res.status(404).send({message:"User doesn't exist", id});
+        }
+
+        const deletedUser=await userModel.findByIdAndDelete(id);
+
+        return res.status(200).send({message:"User deleted succesfully", deletedUser});
+        
+    }catch(er){
+        return res.status(500).send({message:"Internal Server error", error:er.message})
+    }
+})
+
+
 module.exports=router

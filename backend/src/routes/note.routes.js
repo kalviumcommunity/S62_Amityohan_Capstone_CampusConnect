@@ -88,6 +88,25 @@ router.put('/update/:id', async(req,res)=>{
     }
 })
 
+//to delete a note 
+
+router.delete('/delete/:id', async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const note = await noteModel.findById(id);
+        if(!note){
+            return res.status(404).send({message:"Note not found",id});
+        }
+
+        const deletedNote=await noteModel.findByIdAndDelete(id);
+
+        return res.status(200).send({message:"Note deleted successfully", deletedNote});
+    
+
+    }catch(er){
+        return res.status(500).send({message:"Internal Server Error", error:er.message})
+    }
+})
 
 
 module.exports=router;

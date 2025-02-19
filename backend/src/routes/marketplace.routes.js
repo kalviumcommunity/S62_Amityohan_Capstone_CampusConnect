@@ -85,4 +85,23 @@ router.put('/update/:id', async(req,res)=>{
     }
 })
 
+//to delete an item
+
+router.delete('/delete/:id', async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const item= await marketPlaceModel.findById(id);
+        if(!item){
+            return res.status(404).send({message:"Item not found", id});
+        }
+
+        const deletedItem=await marketPlaceModel.findByIdAndDelete(id);
+        
+        return res.status(200).send({message:"Item deleted successfully", deletedItem});
+
+    }catch(er){
+        return res.status(500).send({message:"Internal server error", eror:er.message});
+    }
+})
+
 module.exports=router;
