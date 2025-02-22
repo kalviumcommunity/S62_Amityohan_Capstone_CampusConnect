@@ -1,7 +1,7 @@
 
 require("dotenv").config();
 const express=require('express');
-
+const cors=require('cors')
 //connecting to database
 const connectDB=require('./DB/database.js');
 connectDB();
@@ -22,7 +22,7 @@ const marketPlaceRoutes=require('./routes/marketplace.routes.js')
 const userRoutes=require('./routes/user.route.js')
 //middleware
 app.use(express.json());
-
+app.use(cors())
 
 //Routes
 app.use("/api/notes", noteRoutes);
