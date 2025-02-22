@@ -5,7 +5,7 @@ const noteModel=require('../models/note.model.js')
 
 router.get("/", async(req,res)=>{
     try{
-        const notes=await noteModel.find();
+        const notes=await noteModel.find().populate("uploader","name");
         res.status(200)
         .send({message:"Notes fetched successfully", notes})
     
@@ -18,7 +18,7 @@ router.get("/", async(req,res)=>{
 router.get("/:id", async(req,res)=>{
     try{
         const {id}=req.params;
-        const note= await noteModel.findById(id);
+        const note= await noteModel.findById(id).populate("uploader","name");
         if(!note){
             return res.status(404).send({message:"Note not found",id})
         }
@@ -36,8 +36,8 @@ router.get("/:id", async(req,res)=>{
 
 router.post('/create-note', async(req,res)=>{
     try{
-        const {noteTitle, noteDescription, fileUrl, uploader}=req.body;
-
+        const {noteTitle, noteDescription, fileUrl,uploader:_uploader}=req.body;
+        const uploader=_uploader || req.user._id
         if(!noteTitle || !noteDescription || !fileUrl || !uploader){
             return res.status(400).json({mesasge:"All fields are required"});
         }
@@ -80,7 +80,7 @@ router.put('/update/:id', async(req,res)=>{
             return res.status(404).send({message:"Note not found",id});
         }
 
-        return res.status(201).send({message:"Note updated successfully", updatedNote});
+        return res.status(200).send({message:"Note updated successfully", updatedNote});
 
     }catch(er){
         return res.status(500)

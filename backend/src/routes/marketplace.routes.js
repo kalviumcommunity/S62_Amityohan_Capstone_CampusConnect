@@ -7,7 +7,7 @@ const { estimatedDocumentCount } = require('../models/user.model.js');
 
 router.get('/',async (req,res)=>{
     try{
-        const items=await marketPlaceModel.find();
+        const items=await marketPlaceModel.find().populate("seller","name");
         return res.status(200)
                 .send({message:"Items found", items});
 
@@ -21,7 +21,7 @@ router.get('/',async (req,res)=>{
 router.get('/:id',async(req,res)=>{
     try{
         const {id}=req.params;
-        const item=await marketPlaceModel.findById(id);
+        const item=await marketPlaceModel.findById(id).populate("seller","name");
         if (!item){
             return res.status(404).send({message:"Item not found", id});
         }
@@ -36,9 +36,10 @@ router.get('/:id',async(req,res)=>{
 
 router.post('/add-item', async(req,res)=>{
     try{
-        const {itemName, itemDescription, price, seller, }=req.body;
+        const {itemName, itemDescription, price,seller:_seller,itemImage }=req.body;
+        const seller=_seller || req.user._id;  
 
-        if (!itemName || !itemDescription || !price || !seller){
+        if (!itemName || !itemDescription || !price || !seller ||!itemImage){
             return res.status(400)
                     .send({message:"All fields are requried"})
         }
@@ -47,7 +48,8 @@ router.post('/add-item', async(req,res)=>{
             itemName:itemName,
             itemDescription:itemDescription,
             price:price,
-            seller:seller
+            seller:seller,
+            itemImage:itemImage,
         })
 
         return res.status(201)
@@ -62,7 +64,7 @@ router.post('/add-item', async(req,res)=>{
 router.put('/update/:id', async(req,res)=>{
     try{
         const {id}= req.params;
-        const {itemName, itemDescription, price, seller}= req.body;
+        const {itemName, itemDescription, price, seller,itemImage}= req.body;
         const item= await marketPlaceModel.findById(id);
         if (!item){
             return res.status(404).send({message:"Item not found"})
@@ -70,7 +72,7 @@ router.put('/update/:id', async(req,res)=>{
 
         const updateItem= await marketPlaceModel.findByIdAndUpdate(
             id,
-            {itemName, itemDescription, price, seller},
+            {itemName, itemDescription, price, seller,itemImage},
             {new:true}
         )
 
