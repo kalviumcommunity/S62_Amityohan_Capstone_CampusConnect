@@ -6,6 +6,8 @@ import EventsPage from './pages/EventPage'
 import Footer from './components/footer'
 import NotesPage from './pages/NotesPage'
 import MarketplacePage from './pages/MarketplacePage'
+import ProfilePage from './pages/ProfilePage'
+
 
 
 
@@ -18,6 +20,7 @@ function App() {
           <Route path='/events' element={<EventsPage/>}></Route>
           <Route path='/notes' element={<NotesPage/>}></Route>
           <Route path='/marketplace' element={<MarketplacePage/>}></Route>
+          <Route path='/profile' element={<ProfilePage/>}></Route>
        </Routes>
        <Footer/>  
     </Router>

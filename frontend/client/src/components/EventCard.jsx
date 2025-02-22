@@ -1,4 +1,5 @@
 
+
 const EventCard = ({ eventName, eventDescription, date, organizer, location }) => {
     return (
       <div className="bg-[#343A40] p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 hover:ring-2 hover:ring-white hover:bg-[#495057]">
@@ -7,6 +8,21 @@ const EventCard = ({ eventName, eventDescription, date, organizer, location }) =
         <p className="text-[#adb5bd] mt-2">📅 {date}</p>
         <p className="text-[#ced4da] mt-2">📍 {location}</p>
         <p className="text-[#f8f9fa] mt-2 font-semibold">👤 Organized by {organizer || "Unknown"}</p>
+        <div className="mt-4 flex justify-between">
+        <button 
+          className="bg-[#28A745] text-white px-4 py-2 rounded-lg hover:bg-[#218838] transition"
+          onClick={() => navigate(`/Event/update/${id}}`)}
+        >
+          Update
+        </button>
+        <button 
+          className="bg-[#DC3545] text-white px-4 py-2 rounded-lg hover:bg-[#C82333] transition"
+          // onClick={confirmDelete}
+        >
+          Delete
+        </button>
+
+        </div>
       </div>
     );
   };

@@ -5,6 +5,21 @@ const NotesCard = ({ noteTitle, noteDescription, uploader }) => {
       <h2 className="text-2xl font-semibold text-[#D63384]">{noteTitle}</h2>
       <p className="text-[#6C757D] mt-2">{noteDescription}</p>
       <p className="text-[#8D99AE] mt-4 text-sm">📤 Uploaded by: {uploader || "Unknown"}</p>
+      <div className="mt-4 flex justify-between">
+        <button 
+          className="bg-[#28A745] text-white px-4 py-2 rounded-lg hover:bg-[#218838] transition"
+          onClick={() => navigate(`/marketplace/update/${itemId}`)}
+        >
+          Update
+        </button>
+        <button 
+          className="bg-[#DC3545] text-white px-4 py-2 rounded-lg hover:bg-[#C82333] transition"
+          // onClick={confirmDelete}
+        >
+          Delete
+        </button>
+      </div>
+
     </div>
   );
 };

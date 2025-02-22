@@ -24,7 +24,20 @@ const MarketplaceCard = ({ itemName, itemDescription, price, uploader,itemImage 
       <p className="text-[#495057] mt-2">{itemDescription}</p>
       <p className="text-[#17A2B8] font-bold mt-2">💲 {price}</p>
       <p className="text-[#6C757D] mt-4 text-sm">📤 Listed by: {uploader || "Unknown"}</p>
-      
+      <div className="mt-4 flex justify-between">
+        <button 
+          className="bg-[#28A745] text-white px-4 py-2 rounded-lg hover:bg-[#218838] transition"
+          onClick={() => navigate()}
+        >
+          Update
+        </button>
+        <button 
+          className="bg-[#DC3545] text-white px-4 py-2 rounded-lg hover:bg-[#C82333] transition"
+          // onClick={confirmDelete}
+        >
+          Delete
+        </button>
+        </div>
     </div>
   );
 };
