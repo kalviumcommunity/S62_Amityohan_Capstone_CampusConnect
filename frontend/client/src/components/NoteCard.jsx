@@ -12,8 +12,6 @@ const NotesCard = ({ noteTitle, noteDescription, uploader }) => {
 export default NotesCard;
 
 
-
-
 // const NotesCard = ({ noteTitle, noteDescription, uploader }) => {
 //   return (
 //     <div className="bg-[#FDFFFC] p-6 rounded-lg shadow-md text-[#2E2E2E] hover:shadow-lg transition transform hover:scale-105 hover:ring-2 hover:ring-[#2EC4B6]">
