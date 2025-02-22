@@ -13,4 +13,5 @@ const EventCard = ({ eventName, eventDescription, date, organizer, location }) =
   
   export default EventCard;
   
+
   
