@@ -12,7 +12,18 @@
 
 // export default MarketplaceCard
 
-const MarketplaceCard = ({ itemName, itemDescription, price, uploader,itemImage }) => {
+import { useNavigate } from "react-router-dom";
+
+
+const MarketplaceCard = ({ itemName, 
+  itemId,
+  itemDescription, 
+  price, 
+  uploader,
+  itemImage,
+  onDelete }) => {
+
+  const navigate =useNavigate()
   return (
     <div className="bg-white p-6 rounded-lg shadow-md text-[#495057] hover:shadow-lg transition transform hover:scale-105 hover:ring-2 hover:ring-[#17A2B8]">
       <img 
@@ -27,13 +38,13 @@ const MarketplaceCard = ({ itemName, itemDescription, price, uploader,itemImage 
       <div className="mt-4 flex justify-between">
         <button 
           className="bg-[#28A745] text-white px-4 py-2 rounded-lg hover:bg-[#218838] transition"
-          onClick={() => navigate()}
+          onClick={() => navigate( `/marketplace/update/${itemId}`)}
         >
           Update
         </button>
         <button 
           className="bg-[#DC3545] text-white px-4 py-2 rounded-lg hover:bg-[#C82333] transition"
-          // onClick={confirmDelete}
+          onClick={()=>onDelete(itemId)}
         >
           Delete
         </button>
