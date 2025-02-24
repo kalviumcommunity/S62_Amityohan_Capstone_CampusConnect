@@ -21,6 +21,21 @@ const NotesPage = () => {
     fetchNotes();
   }, []);
 
+  const handleDelete=async(noteId)=>{
+    console.log("Deleting note with Id",noteId)
+    const confirmDelete=window.confirm("Are you sure you want to delete this note?")
+    if(!confirmDelete) return 
+    
+    try{
+      await axios.delete(`http://localhost:8080/api/notes/delete/${noteId}`);
+      setNotes((prevNotes)=>prevNotes.filter(note=>note._id!==noteId))
+    
+    }catch(er){
+      console.log("Error deleting the note", er )
+    }
+
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#212529] text-white p-6">
       <h1 className="text-4xl font-bold text-[#ffffff] mb-6">Campus Notes</h1>
@@ -31,9 +46,11 @@ const NotesPage = () => {
           {notes.map((note) => (
             <NotesCard
               key={note._id}
+              noteId={note._id}
               noteTitle={note.noteTitle}
               noteDescription={note.noteDescription}
               uploader={note.uploader?.name}  // Assuming uploader is a string (name)
+              onDelete={handleDelete}
             />
           ))}
         </div>

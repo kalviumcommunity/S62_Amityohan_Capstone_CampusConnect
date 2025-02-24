@@ -21,6 +21,22 @@ const EventsPage = () => {
     fetchEvents();
   }, []);
 
+const handleDelete=async(eventId)=>{
+    console.log("Deleting event with ID:", eventId); // Debugging line to check eventId
+
+    const confirmDelete=window.confirm("Are you sure you want to delete this event?")
+    if(!confirmDelete) return;
+    try{
+      await axios.delete(`http://localhost:8080/api/events/delete/${eventId}`);
+      setEvents((prevEvents)=>prevEvents.filter(event=>event._id!==eventId))
+
+    }catch(er){
+      console.log("Error deleting event", er)
+    }
+
+
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#212529] text-white p-6">
       <h1 className="text-4xl font-bold text-[#ffffff] mb-6">Campus Events</h1>
@@ -31,11 +47,13 @@ const EventsPage = () => {
           {events.map((event) => (
             <EventCard
               key={event._id}
+              eventId={event._id}
               eventName={event.eventName}
               eventDescription={event.eventDescription}
               date={event.date}
               organizer={event.organizer?.name}
               location={event.location}
+              onDelete={handleDelete}
             />
           ))}
         </div>

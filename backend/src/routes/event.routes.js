@@ -1,11 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const eventModel = require("../models/event.model.js"); // Ensure the event model is imported
+
 const moment = require("moment");
 
-const eventModel = require("../models/event.model.js");
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const eventId = req.params.id;
+        const deletedEvent = await eventModel.findByIdAndDelete(eventId); // Delete the event from the database
+        res.status(200).json({ message: "Event deleted successfully.", deletedEvent });
+
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting event", error });
+    }
+});
 
 //getting all the events
-
 router.get("/", async (req, res) => {
   try {
     const events = await eventModel.find().populate("organizer", "name");
@@ -18,7 +28,6 @@ router.get("/", async (req, res) => {
 });
 
 // getting event by id
-
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -36,7 +45,6 @@ router.get("/:id", async (req, res) => {
 });
 
 //posting a new event
-
 router.post("/add-event", async (req, res) => {
   try {
     const { eventName, eventDescription, date, location, organizer:_organizer } = req.body;
@@ -65,7 +73,6 @@ router.post("/add-event", async (req, res) => {
 });
 
 //to update an event
-
 router.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,25 +96,6 @@ router.put("/update/:id", async (req, res) => {
     }
 
     return res.status(201).send({ message: "Event Updated", updatedEvent });
-  } catch (er) {
-    return res
-      .status(500)
-      .send({ message: "Internal server error", error: er.message });
-  }
-});
-
-// to delete an event
-router.delete("/delete/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const event = await eventModel.findById(id);
-    if (!event) {
-      return res.status(404).send({ message: "Event not found", id });
-    }
-
-    const deletedEvent = await eventModel.findByIdAndDelete(id);
-
-    return res.status(200).send({ message: "Event deleted", deletedEvent });
   } catch (er) {
     return res
       .status(500)
