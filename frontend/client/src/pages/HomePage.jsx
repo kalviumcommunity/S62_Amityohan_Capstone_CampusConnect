@@ -7,7 +7,7 @@ const HomePage = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#212529] text-white">
         <div className="text-center">
           <header className="mb-8">
-            <img src="src\assets\freepik__background__88202.png" alt="Campus Connect Logo" className="w-50 h-50 mx-auto " />
+            <img src="src/assets/freepik__background__88202.png" alt="Campus Connect Logo" className="w-50 h-50 mx-auto " />
             <h1 className="text-4xl font-bold text-[#ffffff]">Welcome to Campus Connect</h1>
             <p className="text-[#f8f9fa] mt-2">Your go-to platform for campus events, marketplace, and notes!</p>
           </header>
