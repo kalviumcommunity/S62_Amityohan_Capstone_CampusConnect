@@ -67,3 +67,10 @@ Often students tend to sell their resources, such as old electronics/clothes tha
 ### Phase 6: Iteration
 **Timeframe:** Ongoing (2–4 weeks post-launch)  
 - Fix bugs and optimize features.
+
+
+## Backend deployment link: 
+    https://s62-amityohan-capstone-campusconnect.onrender.com
+
+## Frontend deployment link:
+    https://tranquil-granita-27f8be.netlify.app/
