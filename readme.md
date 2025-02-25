@@ -73,4 +73,4 @@ Often students tend to sell their resources, such as old electronics/clothes tha
     https://s62-amityohan-capstone-campusconnect.onrender.com
 
 ## Frontend deployment link:
-    https://tranquil-granita-27f8be.netlify.app/
+    https://campus-connect-grw3xwt8g-amityohans-projects.vercel.app
