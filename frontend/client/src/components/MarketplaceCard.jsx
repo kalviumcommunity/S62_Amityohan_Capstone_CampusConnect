@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// function MarketplaceCard() {
-//   return (
-//     <div className="border rounded-lg p-4 shadow-lg">
-//       <h2 className="text-lg font-bold">{item.itemName}</h2>
-//       <p>{item.itemDescription}</p>
-//       <p className="text-sm text-green-600">Price: ${item.price}</p>
-//     </div>
-//   )
-// }
-
-// export default MarketplaceCard
-
 import { useNavigate } from "react-router-dom";
 
 
